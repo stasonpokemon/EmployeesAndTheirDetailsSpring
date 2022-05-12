@@ -15,8 +15,8 @@ CREATE TABLE details
 CREATE TABLE employees
 (
     id         int NOT NULL AUTO_INCREMENT,
-    department VARCHAR(50),
     email      VARCHAR(50),
+    department VARCHAR(50),
     detail_id  int,
     PRIMARY KEY (id),
     FOREIGN KEY (detail_id) REFERENCES details (id)
