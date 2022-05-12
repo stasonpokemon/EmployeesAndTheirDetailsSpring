@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public List<Employee> readAllEmployees() {
         Session session = sessionFactory.getCurrentSession();
         List<Employee> employees = session.createQuery("from Employee", Employee.class).getResultList();
@@ -25,7 +23,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    @Transactional
     public Employee readEmployee(int employeeId) {
         Session session = sessionFactory.getCurrentSession();
         Employee employee = session.get(Employee.class, employeeId);
@@ -33,14 +30,12 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    @Transactional
     public void saveEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(employee);
     }
 
     @Override
-    @Transactional
     public void deleteEmployee(int employeeId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from Employee WHERE id =:employeeId");
